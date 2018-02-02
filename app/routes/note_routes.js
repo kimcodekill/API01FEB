@@ -16,7 +16,7 @@ module.exports = function(app, db) {
                 res.send(result.ops[0]);
             }
         })
-        console.log(req.body);
+        console.log('added a note');
         //res.send('Hello from post ');
     });
 
@@ -57,9 +57,25 @@ module.exports = function(app, db) {
                 res.send(note);
             }
         })
-        console.log(req.body);
+        console.log('updated note');
         //res.send('Hello from post ');
     });
 
     //D=Delete
+    app.delete('/notes/:id', (req, res) => {
+        const myDB = db.db('notesdb');
+
+        const id = req.params.id;
+        const details = {'_id': new objectId(id)};
+        
+        myDB.collection('notes').remove(details, (err, result) => {
+            if (err){
+                res.send({'error': 'An error has occured'});
+            }
+            else{
+                res.send('Note "' + req.body.title + '" has been deleted');
+            }
+        });
+        console.log('deleted a note');
+    });
 };
