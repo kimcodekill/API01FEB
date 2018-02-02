@@ -1,9 +1,10 @@
 var objectId = require('mongodb').ObjectId;
 
+
 module.exports = function(app, db) {
     
     //C=Create/Post
-    app.post('/notes', (req,res) => {
+    app.post('/notes',  (req,res) => {
         const myDB = db.db('notesdb');
         //myDB.collection('notes');
 
@@ -21,7 +22,7 @@ module.exports = function(app, db) {
     });
 
     //R=Read
-    app.get('/notes/:id', (req,res) => {
+    app.get('/notes/:id', cors(corsOptions), (req,res) => {
         const myDB = db.db('notesdb');
 
         const id = req.params.id;
