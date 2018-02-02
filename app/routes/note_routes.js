@@ -41,14 +41,24 @@ module.exports = function(app, db) {
 
     app.get('/notes', cors(), (req,res)=>{
         const myDB = db.db('notesdb');
-        myDB.collection('notes').find((err, item) => {
+        
+        myDB.collection('notes').find({}).toArray((err,item) =>{
             if(err) {
-                res.send({'error': 'An error has occured'});
-            }
-            else {
-                res.send(item);
-            }
+                        res.send({'error': 'An error has occured'});
+                    }
+                    else {
+                        res.send(item);
+                    }
         });
+
+        // myDB.collection('notes').find((err, item) => {
+        //     if(err) {
+        //         res.send({'error': 'An error has occured'});
+        //     }
+        //     else {
+        //         res.send(item);
+        //     }
+        // });
         console.log('asking for all notes');
     })
 
