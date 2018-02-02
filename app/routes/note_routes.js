@@ -1,5 +1,5 @@
 var objectId = require('mongodb').ObjectId;
-
+var cors = require('cors');
 
 module.exports = function(app, db) {
     
@@ -22,7 +22,7 @@ module.exports = function(app, db) {
     });
 
     //R=Read
-    app.get('/notes/:id', cors(corsOptions), (req,res) => {
+    app.get('/notes/:id', cors(), (req,res) => {
         const myDB = db.db('notesdb');
 
         const id = req.params.id;
